@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SeniorMVVMProject</string>
+    <string name="error_message_default">Ocorreu um erro. Verifique sua conexão e tente novamente.</string>
+    <string name="lorem_picsum_image">Lorem Picsum image</string>
+</resources>
