@@ -1,8 +1,8 @@
-package com.example.seniormvvmproject;
+package com.example.picsumgram;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

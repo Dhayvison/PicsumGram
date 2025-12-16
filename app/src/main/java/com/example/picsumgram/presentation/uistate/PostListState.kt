@@ -1,6 +1,6 @@
-package com.example.seniormvvmproject.presentation.uistate
+package com.example.picsumgram.presentation.uistate
 
-import com.example.seniormvvmproject.data.model.Post
+import com.example.picsumgram.data.model.Post
 
 sealed interface PostListState {
     // 1. Estado de Carregamento (não precisa de dados extras)

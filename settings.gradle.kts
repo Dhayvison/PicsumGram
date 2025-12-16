@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SeniorMVVMProject"
+rootProject.name = "PicsumGram"
 include(":app")

@@ -1,4 +1,4 @@
-package com.example.seniormvvmproject.presentation.adapter;
+package com.example.picsumgram.presentation.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,8 +21,8 @@ import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.seniormvvmproject.R;
-import com.example.seniormvvmproject.data.model.Post;
+import com.example.picsumgram.R;
+import com.example.picsumgram.data.model.Post;
 
 import java.util.Collections;
 import java.util.List;

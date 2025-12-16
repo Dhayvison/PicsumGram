@@ -1,11 +1,11 @@
-package com.example.seniormvvmproject.presentation.viewmodel
+package com.example.picsumgram.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.seniormvvmproject.data.repository.PostRepository
-import com.example.seniormvvmproject.presentation.uistate.PostListState
+import com.example.picsumgram.data.repository.PostRepository
+import com.example.picsumgram.presentation.uistate.PostListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Collections

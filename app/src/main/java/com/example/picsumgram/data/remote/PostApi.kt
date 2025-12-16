@@ -1,7 +1,7 @@
-package com.example.seniormvvmproject.data.remote
+package com.example.picsumgram.data.remote
 
+import com.example.picsumgram.data.model.Post
 import retrofit2.http.GET
-import com.example.seniormvvmproject.data.model.Post
 
 interface PostApi {
     @GET("posts")

@@ -1,4 +1,4 @@
-package com.example.seniormvvmproject.data.model
+package com.example.picsumgram.data.model
 
 data class Post(
     val userId: Int,

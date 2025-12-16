@@ -1,7 +1,7 @@
-package com.example.seniormvvmproject;
+package com.example.picsumgram;
 
-import static com.example.seniormvvmproject.presentation.adapter.PostAdapter.PostModelProvider.PRELOAD_AHEAD_ITEMS;
-import static com.example.seniormvvmproject.presentation.adapter.PostAdapter.getScreenWidthInPixels;
+import static com.example.picsumgram.presentation.adapter.PostAdapter.PostModelProvider.PRELOAD_AHEAD_ITEMS;
+import static com.example.picsumgram.presentation.adapter.PostAdapter.getScreenWidthInPixels;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +19,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.FixedPreloadSizeProvider;
-import com.example.seniormvvmproject.data.model.Post;
-import com.example.seniormvvmproject.presentation.adapter.PostAdapter;
-import com.example.seniormvvmproject.presentation.uistate.PostListState;
-import com.example.seniormvvmproject.presentation.viewmodel.PostViewModel;
+import com.example.picsumgram.data.model.Post;
+import com.example.picsumgram.presentation.adapter.PostAdapter;
+import com.example.picsumgram.presentation.uistate.PostListState;
+import com.example.picsumgram.presentation.viewmodel.PostViewModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         ShimmerFrameLayout loading = findViewById(R.id.posts_loading);
         TextView textViewError = findViewById(R.id.textViewError);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
 
         postAdapter = new PostAdapter();
 

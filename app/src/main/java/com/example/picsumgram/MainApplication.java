@@ -1,6 +1,7 @@
-package com.example.seniormvvmproject;
+package com.example.picsumgram;
 
 import android.app.Application;
+
 import dagger.hilt.android.HiltAndroidApp;
 
 @HiltAndroidApp

@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.seniormvvmproject"
+    namespace = "com.example.picsumgram"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.seniormvvmproject"
+        applicationId = "com.example.picsumgram"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

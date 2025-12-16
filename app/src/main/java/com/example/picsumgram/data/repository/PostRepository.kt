@@ -1,7 +1,7 @@
-package com.example.seniormvvmproject.data.repository
+package com.example.picsumgram.data.repository
 
-import com.example.seniormvvmproject.data.remote.PostApi
-import com.example.seniormvvmproject.data.model.Post
+import com.example.picsumgram.data.model.Post
+import com.example.picsumgram.data.remote.PostApi
 import javax.inject.Inject
 
 class PostRepository @Inject constructor(
