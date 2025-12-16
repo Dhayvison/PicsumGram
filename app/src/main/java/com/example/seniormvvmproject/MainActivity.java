@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
@@ -41,19 +42,28 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.posts_recyclerview);
         ShimmerFrameLayout loading = findViewById(R.id.posts_loading);
         TextView textViewError = findViewById(R.id.textViewError);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
         postAdapter = new PostAdapter();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
 
         PostViewModel postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
 
+        swipeRefreshLayout.setOnRefreshListener(postViewModel::loadPosts);
+
         postViewModel.getState().observe(this, state -> {
             if (state instanceof PostListState.Loading) {
-                recyclerView.setVisibility(View.GONE);
                 textViewError.setVisibility(View.GONE);
-                loading.setVisibility(View.VISIBLE);
-                loading.startShimmer();
+
+                if (postAdapter.getCurrentList().isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    loading.setVisibility(View.VISIBLE);
+                    loading.startShimmer();
+                } else {
+                    loading.setVisibility(View.GONE);
+                }
 
                 postAdapter.submitList(null);
             } else if (state instanceof PostListState.Success) {
@@ -61,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewError.setVisibility(View.GONE);
                 loading.setVisibility(View.GONE);
                 loading.stopShimmer();
+                swipeRefreshLayout.setRefreshing(false);
 
                 PostListState.Success successState = (PostListState.Success) state;
                 List<Post> posts = successState.getPosts();
@@ -91,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewError.setVisibility(View.VISIBLE);
                 loading.setVisibility(View.GONE);
                 loading.stopShimmer();
+                swipeRefreshLayout.setRefreshing(false);
 
                 PostListState.Error errorState = (PostListState.Error) state;
                 Toast.makeText(MainActivity.this, errorState.getMessage(), Toast.LENGTH_LONG).show();

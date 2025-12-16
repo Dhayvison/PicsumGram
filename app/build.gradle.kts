@@ -71,4 +71,5 @@ dependencies {
     implementation(libs.shimmer)
     implementation(libs.recyclerview.integration.v4160)
 
+    implementation(libs.androidx.swiperefreshlayout)
 }
