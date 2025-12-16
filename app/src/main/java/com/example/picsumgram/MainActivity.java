@@ -3,11 +3,11 @@ package com.example.picsumgram;
 import static com.example.picsumgram.presentation.adapter.PostAdapter.PostModelProvider.PRELOAD_AHEAD_ITEMS;
 import static com.example.picsumgram.presentation.adapter.PostAdapter.getScreenWidthInPixels;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -102,15 +102,34 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.addOnScrollListener(preloader);
                 }
             } else if (state instanceof PostListState.Error) {
-                recyclerView.setVisibility(View.GONE);
-                textViewError.setVisibility(View.VISIBLE);
+                // Removemos a manipulação de Views daqui, pois a ErrorActivity
+                // será responsável por mostrar a tela de erro completa.
+
                 loading.setVisibility(View.GONE);
                 loading.stopShimmer();
                 swipeRefreshLayout.setRefreshing(false);
 
+                // --- NOVO CÓDIGO DE NAVEGAÇÃO ---
+
                 PostListState.Error errorState = (PostListState.Error) state;
-                Toast.makeText(MainActivity.this, errorState.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e(TAG, "Estado: Erro de Rede: " + errorState.getMessage());
+                String errorMessage = errorState.getMessage();
+
+                // 1. Loga a mensagem (Bom para debug)
+                Log.e(TAG, "Estado: Erro de Rede: " + errorMessage);
+
+                // 2. Cria o Intent para a ErrorActivity
+                Intent intent = new Intent(MainActivity.this, ErrorActivity.class);
+
+                // 3. Adiciona a mensagem de erro como um Extra
+                intent.putExtra(ErrorActivity.EXTRA_ERROR_MESSAGE, errorMessage);
+
+                // 4. Inicia a Activity
+                startActivity(intent);
+
+                // 5. Finaliza a MainActivity para que o botão 'Voltar'
+                //    na ErrorActivity leve o usuário para fora do app.
+                // Se você quiser manter a MainActivity na pilha, remova o finish().
+                finish();
             }
         });
     }

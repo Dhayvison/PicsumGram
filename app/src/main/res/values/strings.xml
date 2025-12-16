@@ -2,4 +2,6 @@
     <string name="app_name">PicsumGram</string>
     <string name="error_message_default">Ocorreu um erro. Verifique sua conexão e tente novamente.</string>
     <string name="lorem_picsum_image">Lorem Picsum image</string>
+    <string name="button_return_to_home">Voltar ao início</string>
+    <string name="error_icon_description">Ocorreu um erro</string>
 </resources>
