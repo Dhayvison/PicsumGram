@@ -7,7 +7,7 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="colorSurface">@color/background</item>
 
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:enforceStatusBarContrast">true</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowEnterTransition">@android:transition/fade</item>

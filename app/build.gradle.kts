@@ -77,4 +77,11 @@ dependencies {
     implementation(libs.recyclerview.integration.v4160)
 
     implementation(libs.androidx.swiperefreshlayout)
+
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    kapt(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.room.ktx)
 }

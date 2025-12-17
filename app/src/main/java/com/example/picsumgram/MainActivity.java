@@ -3,12 +3,18 @@ package com.example.picsumgram;
 import static com.example.picsumgram.presentation.adapter.PostAdapter.PostModelProvider.PRELOAD_AHEAD_ITEMS;
 import static com.example.picsumgram.presentation.adapter.PostAdapter.getScreenWidthInPixels;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
     private PostAdapter postAdapter;
     private RecyclerViewPreloader<Post> preloader;
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+        return capabilities != null &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.posts_recyclerview);
         ShimmerFrameLayout loading = findViewById(R.id.posts_loading);
-        TextView textViewError = findViewById(R.id.textViewError);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView offlineIndicator = findViewById(R.id.offline_indicator);
 
         setSupportActionBar(toolbar);
 
@@ -59,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         postViewModel.getState().observe(this, state -> {
             if (state instanceof PostListState.Loading) {
-                textViewError.setVisibility(View.GONE);
-
                 if (postAdapter.getCurrentList().isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
                     loading.setVisibility(View.VISIBLE);
@@ -72,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 postAdapter.submitList(null);
             } else if (state instanceof PostListState.Success) {
                 recyclerView.setVisibility(View.VISIBLE);
-                textViewError.setVisibility(View.GONE);
                 loading.setVisibility(View.GONE);
                 loading.stopShimmer();
                 swipeRefreshLayout.setRefreshing(false);
@@ -102,35 +113,48 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.addOnScrollListener(preloader);
                 }
             } else if (state instanceof PostListState.Error) {
-                // Removemos a manipulação de Views daqui, pois a ErrorActivity
-                // será responsável por mostrar a tela de erro completa.
 
                 loading.setVisibility(View.GONE);
                 loading.stopShimmer();
                 swipeRefreshLayout.setRefreshing(false);
 
-                // --- NOVO CÓDIGO DE NAVEGAÇÃO ---
-
                 PostListState.Error errorState = (PostListState.Error) state;
                 String errorMessage = errorState.getMessage();
 
-                // 1. Loga a mensagem (Bom para debug)
                 Log.e(TAG, "Estado: Erro de Rede: " + errorMessage);
 
-                // 2. Cria o Intent para a ErrorActivity
                 Intent intent = new Intent(MainActivity.this, ErrorActivity.class);
 
-                // 3. Adiciona a mensagem de erro como um Extra
                 intent.putExtra(ErrorActivity.EXTRA_ERROR_MESSAGE, errorMessage);
 
-                // 4. Inicia a Activity
                 startActivity(intent);
 
-                // 5. Finaliza a MainActivity para que o botão 'Voltar'
-                //    na ErrorActivity leve o usuário para fora do app.
-                // Se você quiser manter a MainActivity na pilha, remova o finish().
                 finish();
             }
         });
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .build();
+
+        connectivityManager.registerNetworkCallback(networkRequest, new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(@NonNull Network network) {
+                super.onAvailable(network);
+                runOnUiThread(() -> offlineIndicator.setVisibility(View.GONE));
+            }
+
+            @Override
+            public void onLost(@NonNull Network network) {
+                super.onLost(network);
+                runOnUiThread(() -> offlineIndicator.setVisibility(View.VISIBLE));
+            }
+        });
+
+        if (!isNetworkAvailable()) {
+            offlineIndicator.setVisibility(View.VISIBLE);
+        }
     }
 }

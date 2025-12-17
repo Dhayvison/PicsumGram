@@ -12,11 +12,15 @@ recyclerviewIntegration = "4.16.0"
 retrofit = "3.0.0"
 kotlin = "2.2.0"
 coreKtx = "1.17.0"
+roomRuntime = "2.8.4"
 shimmer = "0.5.0"
 swiperefreshlayout = "1.2.0"
 
 [libraries]
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltNavigationFragment" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 com-google-dagger-hilt-android7 = { module = "com.google.dagger:hilt-android", version.ref = "comGoogleDaggerHiltAndroid6" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }

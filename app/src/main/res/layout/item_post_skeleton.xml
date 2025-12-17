@@ -10,10 +10,9 @@
         android:id="@+id/image_skeleton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#e0e0e0"
+        android:background="@color/skeleton_loading"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,20 +30,20 @@
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
-            android:background="#e0e0e0" />
+            android:background="@color/skeleton_loading" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="14dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#e0e0e0" />
+            android:background="@color/skeleton_loading" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="14dp"
             android:layout_marginEnd="100dp"
-            android:background="#e0e0e0" />
+            android:background="@color/skeleton_loading" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
