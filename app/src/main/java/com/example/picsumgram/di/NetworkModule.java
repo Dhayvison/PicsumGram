@@ -1,6 +1,7 @@
 package com.example.picsumgram.di;
 
 import com.example.picsumgram.data.remote.PostApi;
+import com.example.picsumgram.data.remote.UserApi;
 
 import javax.inject.Singleton;
 
@@ -37,5 +38,11 @@ public class NetworkModule {
     @Singleton
     public PostApi providePostApi(Retrofit retrofit) {
         return retrofit.create(PostApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public UserApi provideUserApi(Retrofit retrofit) {
+        return retrofit.create(UserApi.class);
     }
 }

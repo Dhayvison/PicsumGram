@@ -1,6 +1,5 @@
 package com.example.picsumgram;
 
-import static com.example.picsumgram.presentation.adapter.PostAdapter.PostModelProvider.PRELOAD_AHEAD_ITEMS;
 import static com.example.picsumgram.presentation.adapter.PostAdapter.getScreenWidthInPixels;
 
 import android.content.Context;
@@ -27,7 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.FixedPreloadSizeProvider;
-import com.example.picsumgram.data.model.Post;
+import com.example.picsumgram.data.model.PostWithUser;
 import com.example.picsumgram.presentation.adapter.PostAdapter;
 import com.example.picsumgram.presentation.uistate.PostListState;
 import com.example.picsumgram.presentation.viewmodel.PostViewModel;
@@ -41,7 +40,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private PostAdapter postAdapter;
-    private RecyclerViewPreloader<Post> preloader;
+    private RecyclerViewPreloader<PostWithUser> preloader;
 
     private boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
 
                 PostListState.Success successState = (PostListState.Success) state;
-                List<Post> posts = successState.getPosts();
+                List<PostWithUser> posts = successState.getPosts();
 
                 postAdapter.submitList(posts);
 
@@ -102,15 +101,17 @@ public class MainActivity extends AppCompatActivity {
 
                     int screenWidth = getScreenWidthInPixels(this);
 
-                    FixedPreloadSizeProvider<Post> sizeProvider =
-                            new FixedPreloadSizeProvider<>(screenWidth, screenWidth);
+                    int height = (int) (screenWidth * 1.5);
+
+                    FixedPreloadSizeProvider<PostWithUser> sizeProvider =
+                            new FixedPreloadSizeProvider<>(screenWidth, height);
 
                     // Cria o ListPreloader
-                    preloader = new RecyclerViewPreloader<>(
+                    preloader = new RecyclerViewPreloader<PostWithUser>(
                             Glide.with(this),
                             provider,
                             sizeProvider,
-                            PRELOAD_AHEAD_ITEMS
+                            10
                     );
 
                     recyclerView.addOnScrollListener(preloader);

@@ -28,7 +28,7 @@ class PostViewModel @Inject constructor(
             _state.value = PostListState.Loading
 
             try {
-                val postData = repository.getPosts()
+                val postData = repository.getPostsWithUsers()
                 Collections.shuffle(postData)
 
                 _state.value = PostListState.Success(postData)

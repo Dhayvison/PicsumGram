@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.picsumgram.data.db.AppDatabase
 import com.example.picsumgram.data.db.PostDao
+import com.example.picsumgram.data.db.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +33,10 @@ object DatabaseModule {
     @Provides
     fun providePostDao(appDatabase: AppDatabase): PostDao {
         return appDatabase.postDao()
+    }
+
+    @Provides
+    fun provideUserDao(appDatabase: AppDatabase): UserDao {
+        return appDatabase.userDao()
     }
 }

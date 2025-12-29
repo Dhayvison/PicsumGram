@@ -3,47 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    android:orientation="vertical">
+    android:layout_marginBottom="16dp">
+
+    <View
+        android:id="@+id/avatar_skeleton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="12dp"
+        android:background="@color/skeleton_loading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/name_skeleton"
+        android:layout_width="120dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="12dp"
+        android:background="@color/skeleton_loading"
+        app:layout_constraintBottom_toTopOf="@id/email_skeleton"
+        app:layout_constraintStart_toEndOf="@id/avatar_skeleton"
+        app:layout_constraintTop_toTopOf="@id/avatar_skeleton"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <View
+        android:id="@+id/email_skeleton"
+        android:layout_width="80dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/skeleton_loading"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_skeleton"
+        app:layout_constraintStart_toStartOf="@id/name_skeleton"
+        app:layout_constraintTop_toBottomOf="@id/name_skeleton" />
 
     <View
         android:id="@+id/image_skeleton"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         android:background="@color/skeleton_loading"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/avatar_skeleton" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_skeleton">
 
         <View
             android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="18dp"
+            android:background="@color/skeleton_loading" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:layout_marginTop="8dp"
             android:background="@color/skeleton_loading" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="14dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/skeleton_loading" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="14dp"
             android:layout_marginEnd="100dp"
             android:background="@color/skeleton_loading" />
-
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
