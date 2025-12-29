@@ -7,12 +7,14 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="colorSurface">@color/background</item>
 
-        <item name="android:enforceStatusBarContrast">true</item>
-
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowActivityTransitions">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <item name="android:enforceNavigationBarContrast">false</item>
         <item name="android:windowEnterTransition">@android:transition/fade</item>
         <item name="android:windowExitTransition">@android:transition/fade</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="Theme.Picsumgram" parent="Base.Theme.Picsumgram" />

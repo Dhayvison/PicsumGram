@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:background="?attr/colorSurface"
+        android:elevation="8dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="8dp"
+        app:statusBarForeground="?attr/colorSurface">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurface"
-            android:paddingTop="16sp"
             app:layout_scrollFlags="scroll|enterAlways"
             app:title="@string/app_name">
 
@@ -52,13 +56,12 @@
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_primary"
             android:gravity="center"
-
             android:padding="4dp"
-            android:text="Modo Offline"
-            android:textSize="8sp"
+            android:text="@string/offline_mode"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_scrollFlags="scroll" />
+            app:layout_scrollFlags="snap" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -71,6 +74,8 @@
             android:id="@+id/posts_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="48dp"
             tools:listitem="@layout/item_post" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
