@@ -10,5 +10,6 @@
     <color name="text_primary">#FF212121</color>
     <color name="text_secondary">#FF757575</color>
     <color name="background">#FFFFFAE8</color>
+    <color name="background_dark">#FF212121</color>
     <color name="skeleton_loading">#E0E0E0</color>
 </resources>
